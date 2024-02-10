@@ -1,4 +1,4 @@
-# Store_StudentRecord
+# Storing-StudentRecord
 Simple Storing Student Record in C++
 
 Note: 
