@@ -2,59 +2,72 @@
 #include <string.h>
 #include <windows.h>
 #include <ctype.h>
-	
-void gotoxy(short x, short y){
-	COORD c = {x, y};
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
+
+void gotoxy(short x, short y)
+{
+    COORD c = {x, y};
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
-	
-struct students {
-	char name[25];
-	int id;
-	float gwa;
+
+struct students 
+{
+    char strName[25];
+    int intId;
+    float fGwa;
 };
-	
-int main(){
-	struct students record[10];
-	int numStud = 0, intStudentCount = 1;
-	char response;
-		
-	do {
-	   system("cls");
-    int centerX = 45; // Center X position
-    int centerY = 4; // Center Y position
-	    
-	    gotoxy(centerX, centerY); printf("### Storing Student Record ###");
-	    gotoxy(centerX - 7, centerY + 2); printf("Student Count: %d", intStudentCount);
-	    
-	    gotoxy(centerX - 10, centerY + 4); printf("Enter Student Name: ");
-	    scanf("%s", &record[numStud].name);
-	    
-	    gotoxy(centerX - 10, centerY + 5); printf("Enter Student ID: ");
-	    scanf("%d", &record[numStud].id);
-	    
-	    gotoxy(centerX - 10, centerY + 6); printf("Enter Student GWA: ");
-	    scanf("%f", &record[numStud].gwa);
-	    
-	    numStud++;
-	    intStudentCount++;
-	    
-	    gotoxy(centerX - 10, centerY + 8); printf("Record another student? (Y/N): ");
-	    scanf(" %c", &response);
-	} while (toupper(response) == 'Y' || toupper(response) == 'y');
-	
-		system("cls");
-		int centerX = 45;
-		int centerY = 10; 
 
-		gotoxy(centerX, centerY); printf("List of students:");
-		gotoxy(centerX, centerY + 1); printf("%-15s%-15s%-15s\n", "Name", "ID Number", "GWA");
-	
-		for (int i = 0; i < numStud; i++) {
-    gotoxy(centerX, centerY + 2 + i); printf("%-15s%-15d%-15.2f\n", record[i].name, record[i].id, record[i].gwa);
+int main()
+{
+    struct students record[10];
+    int intNumberStudent = 0, intStudentCount = 0, intCenterX = 45, intCenterY = 4, intCenterY2 = 10;
+    char chrResponse = ' ', chrRating[15];
+    float fGwa = 0.00f;
+
+    do 
+	{
+        system("cls");
+
+        gotoxy(intCenterX, intCenterY); printf("### Storing Student Record ###");
+        gotoxy(intCenterX - 7, intCenterY + 2); printf("Student Count: %d", intStudentCount);
+
+        gotoxy(intCenterX - 10, intCenterY + 4); printf("Enter Student Name: ");
+        scanf("%24s", record[intNumberStudent].strName);
+
+        gotoxy(intCenterX - 10, intCenterY + 5); printf("Enter Student ID: ");
+        scanf("%d", &record[intNumberStudent].intId);
+
+        gotoxy(intCenterX - 10, intCenterY + 6); printf("Enter Student GWA: ");
+        scanf("%f", &record[intNumberStudent].fGwa);
+
+        intNumberStudent++;
+        intStudentCount++;
+
+        gotoxy(intCenterX - 10, intCenterY + 8); printf("Record another student? (Y/N): ");
+        scanf(" %c", &chrResponse);
+    } while (toupper(chrResponse) == 'Y');
+
+    system("cls");
+
+    gotoxy(intCenterX - 15, intCenterY2); printf("List of students:");
+    gotoxy(intCenterX - 15, intCenterY2 + 1); printf("%-25s%-15s%-15s%-15s\n", "NAME", "ID NUMBER", "GWA", "RATING");
+
+    for (int intCounter = 0; intCounter < intStudentCount; intCounter++) 
+	{
+        
+		fGwa = record[intCounter].fGwa;
+
+        if (fGwa >= 90)
+            strcpy(chrRating, "Outstanding!");
+        else if (fGwa >= 80 && fGwa <= 89)
+            strcpy(chrRating, "Great!");
+        else if (fGwa >= 75 && fGwa <= 79)
+            strcpy(chrRating, "Study!!!");
+        else
+            strcpy(chrRating, "Failed!");
+
+        gotoxy(intCenterX - 15, intCenterY2 + 2 + intCounter);
+        printf("%-25s%-15d%-15.2f%-15s\n", record[intCounter].strName, record[intCounter].intId, record[intCounter].fGwa, chrRating);
+    }
+
+    return 0;
 }
-
-	
-	
-	    return 0;
-	}
