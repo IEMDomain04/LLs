@@ -2,6 +2,6 @@
 Simple Storing Student Record in C++
 
 Note: 
-> Modify program to basic coding standard #DONE
+> #DONE Modify program to basic coding standard 
 
-> Added a rating result #DONE
+> #DONE Added a rating result 
