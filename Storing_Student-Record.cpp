@@ -54,7 +54,7 @@ int main()
     for (int intCounter = 0; intCounter < intStudentCount; intCounter++) 
 	{
         
-		fGwa = record[intCounter].fGwa;
+	fGwa = record[intCounter].fGwa;
 
         if (fGwa >= 90)
             strcpy(chrRating, "Outstanding!");
